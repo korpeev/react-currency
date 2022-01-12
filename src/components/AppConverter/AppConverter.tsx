@@ -25,24 +25,22 @@ const AppConverter: FC<AppConverterProps> = ({
     from: '',
     to: '',
   });
-  const [currencyFrom, setCurencyFrom] = useState(baseCurrency ?? 'RUB');
+  const [currencyFrom, setCurencyFrom] = useState('RUB');
   const [currencyTo, setCurrencyTo] = useState('KZT');
+
   const handleSelectFromCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
     setCurencyFrom(e.target.value);
     setInput((prev) => ({ ...prev, from: '' }));
     api.fetchCurrencyByValue(e.target.value).then((response) => {
       const currencies = mappingCurrencies(response);
-      setCurrencyList([
-        { currency: e.target.value, id: uuid() },
-        ...currencies,
-      ]);
+      setCurrencyList(currencies);
       setBaseCurrency(response.query.base_currency);
     });
   };
   const toValue = useMemo(
     () =>
       currencyList.find((c) => c.currency === currencyTo)?.value?.toFixed(2),
-    [currencyFrom]
+    [currencyFrom, currencyList, currencyTo]
   );
   const handleSelectToCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
     setCurrencyTo(e.target.value);
@@ -64,9 +62,9 @@ const AppConverter: FC<AppConverterProps> = ({
   };
   useEffect(() => {
     convertCurrency();
-  }, [input.from]);
+  }, [input.from, currencyList, toValue, currencyTo]);
   const renderOptions = () => {
-    return currencyList.map(({ currency, value, id }) => (
+    return currencyList.map(({ currency, id }) => (
       <option key={id} value={currency}>
         {currency}
       </option>

@@ -17,10 +17,7 @@ function App() {
       .fetchCurrencies()
       .then((response) => {
         const currencies = mappingCurrencies(response);
-        setCurrencyList([
-          { currency: 'USD', value: 0, id: uuid() },
-          ...currencies,
-        ]);
+        setCurrencyList(currencies);
         setBaseCurrency(response.query.base_currency);
       })
       .finally(() => setLoading(false));
