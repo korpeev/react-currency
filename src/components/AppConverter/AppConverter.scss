@@ -1,0 +1,50 @@
+.app__converter {
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &_input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    input {
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.3rem;
+      border: 1px solid #8f8f8f;
+      width: 50%;
+      max-width: 250px;
+    }
+  }
+  &_textfield {
+    display: flex;
+    align-items: center;
+    select {
+      width: 4rem;
+      padding: 0.5rem 0.3rem;
+      margin-right: 0.2rem;
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+.app__converted {
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  &_text {
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.app__converter_rotate {
+  width: 40px;
+  height: 32px;
+  font-size: 19px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
